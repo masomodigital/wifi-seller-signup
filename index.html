@@ -1,45 +1,92 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WiFi Seller Signup</title>
     <style>
+      /* Global Styles */
       body {
-        font-family: Arial, sans-serif;
-        margin: 40px;
-        background: #f4f4f9;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(135deg, #eef2f7, #dbe4f0);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
       }
-      h2 {
-        color: #333;
-      }
+
+      /* Container */
       .container {
+        width: 100%;
         max-width: 400px;
-        margin: auto;
-        background: #fff;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        background: #ffffff;
+        padding: 40px 30px;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        text-align: center;
       }
+
+      h2 {
+        color: #1a1a1a;
+        margin-bottom: 25px;
+        font-size: 1.8rem;
+      }
+
+      /* Form Elements */
       input, button {
         width: 100%;
-        padding: 10px;
-        margin: 8px 0;
-        border: 1px solid #ccc;
-        border-radius: 5px;
+        padding: 12px 15px;
+        margin: 10px 0;
+        border-radius: 8px;
+        font-size: 1rem;
+        box-sizing: border-box;
       }
+
+      input {
+        border: 1px solid #ccc;
+        transition: border 0.3s;
+      }
+
+      input:focus {
+        border-color: #2c7be5;
+        outline: none;
+      }
+
       button {
-        background: #2c7be5;
-        color: white;
+        background-color: #2c7be5;
+        color: #fff;
         border: none;
         cursor: pointer;
+        transition: background 0.3s;
       }
+
       button:hover {
-        background: #1a5bb8;
+        background-color: #1a5bb8;
       }
+
+      /* Message */
       .message {
-        margin-top: 15px;
-        font-size: 14px;
+        margin-top: 20px;
+        font-size: 0.95rem;
         white-space: pre-line;
+      }
+
+      /* Responsive */
+      @media (max-width: 480px) {
+        .container {
+          padding: 30px 20px;
+        }
+
+        h2 {
+          font-size: 1.5rem;
+        }
+
+        input, button {
+          padding: 10px 12px;
+          font-size: 0.95rem;
+        }
       }
     </style>
   </head>
@@ -56,7 +103,7 @@
     </div>
 
     <script>
-      const WORKER_URL = "https://red-grass-ec47.dmaundu02.workers.dev/"; // 👈 replace with your Worker URL
+      const WORKER_URL = "https://red-grass-ec47.dmaundu02.workers.dev/";
 
       document.getElementById("signupForm").addEventListener("submit", async function(e) {
         e.preventDefault();
