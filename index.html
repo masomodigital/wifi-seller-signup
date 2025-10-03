@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>WiFi Seller Signup</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 40px;
+        background: #f4f4f9;
+      }
+      h2 {
+        color: #333;
+      }
+      .container {
+        max-width: 400px;
+        margin: auto;
+        background: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      }
+      input, button {
+        width: 100%;
+        padding: 10px;
+        margin: 8px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      button {
+        background: #2c7be5;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+      button:hover {
+        background: #1a5bb8;
+      }
+      .message {
+        margin-top: 15px;
+        font-size: 14px;
+        white-space: pre-line;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>WiFi Seller Signup</h2>
+      <form id="signupForm">
+        <input type="text" id="sellerName" placeholder="Business/Seller Name" required>
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="text" id="mpesaNumber" placeholder="M-PESA Number (e.g. 2547...)" required>
+        <button type="submit">Sign Up</button>
+      </form>
+      <div class="message" id="message"></div>
+    </div>
+
+    <script>
+      const WORKER_URL = "https://red-grass-ec47.dmaundu02.workers.dev/"; // 👈 replace with your Worker URL
+
+      document.getElementById("signupForm").addEventListener("submit", async function(e) {
+        e.preventDefault();
+
+        const sellerName = document.getElementById("sellerName").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const mpesaNumber = document.getElementById("mpesaNumber").value.trim();
+
+        document.getElementById("message").innerText = "Processing signup...";
+
+        try {
+          const res = await fetch(WORKER_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              action: "signupSeller",
+              sellerName,
+              email,
+              mpesaNumber
+            })
+          });
+
+          const data = await res.json();
+
+          if (data.success) {
+            document.getElementById("message").innerText =
+              "✅ Seller created!\nSellerID: " + data.sellerId +
+              "\nSubaccountID: " + data.subaccountId;
+            document.getElementById("signupForm").reset();
+          } else {
+            document.getElementById("message").innerText = "❌ " + data.message;
+          }
+        } catch (err) {
+          document.getElementById("message").innerText = "Error: " + err.message;
+        }
+      });
+    </script>
+  </body>
+</html>
