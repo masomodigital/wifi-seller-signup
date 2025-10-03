@@ -96,7 +96,8 @@
       <form id="signupForm">
         <input type="text" id="sellerName" placeholder="Business/Seller Name" required>
         <input type="email" id="email" placeholder="Email" required>
-        <input type="text" id="mpesaNumber" placeholder="M-PESA Number (e.g. 2547...)" required>
+        <input type="text" id="mpesaNumber" placeholder="M-PESA Number (e.g. 0715399449)" required
+               pattern="0\d{9}" title="Enter a valid 10-digit M-PESA number starting with 0">
         <button type="submit">Sign Up</button>
       </form>
       <div class="message" id="message"></div>
@@ -111,6 +112,14 @@
         const sellerName = document.getElementById("sellerName").value.trim();
         const email = document.getElementById("email").value.trim();
         const mpesaNumber = document.getElementById("mpesaNumber").value.trim();
+
+        // Inline validation for 10-digit M-PESA number
+        const mpesaPattern = /^0\d{9}$/;
+        if (!mpesaPattern.test(mpesaNumber)) {
+          document.getElementById("message").innerText =
+            "❌ Please enter a valid 10-digit M-PESA number starting with 0.";
+          return;
+        }
 
         document.getElementById("message").innerText = "Processing signup...";
 
