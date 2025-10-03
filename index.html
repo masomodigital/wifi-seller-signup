@@ -96,8 +96,13 @@
       <form id="signupForm">
         <input type="text" id="sellerName" placeholder="Business/Seller Name" required>
         <input type="email" id="email" placeholder="Email" required>
-        <input type="text" id="mpesaNumber" placeholder="M-PESA Number (e.g. 0715399449)" required
-               pattern="0\d{9}" title="Enter a valid 10-digit M-PESA number starting with 0">
+        <input type="text" id="mpesaNumber"
+               placeholder="M-PESA Number (e.g. 0715399449)"
+               required
+               pattern="0\d{9}"
+               title="Enter a valid 10-digit M-PESA number starting with 0"
+               maxlength="10"
+               oninput="this.value = this.value.replace(/\D/g,'');">
         <button type="submit">Sign Up</button>
       </form>
       <div class="message" id="message"></div>
